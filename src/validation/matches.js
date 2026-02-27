@@ -32,6 +32,16 @@ export const createMatchSchema = z
         awayScore: z.coerce.number().int().nonnegative().optional(),
     })
     .superRefine((data, ctx) => {
+        const hasHomeScore = data.homeScore !== undefined;
+        const hasAwayScore = data.awayScore !== undefined;
+        if (hasHomeScore !== hasAwayScore) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                path: ['awayScore'],
+                message: 'homeScore and awayScore must be provided together',
+            });
+        }
+
         const startTime = new Date(data.startTime);
         const endTime = new Date(data.endTime);
 
