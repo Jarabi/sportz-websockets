@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
     createMatchSchema,
     listMatchesQuerySchema,
+    MAX_MATCHES_LIMIT,
 } from '../validation/matches.js';
 import { matches } from '../db/schema.js';
 import { db } from '../db/db.js';
@@ -10,7 +11,7 @@ import { desc } from 'drizzle-orm';
 
 export const matchRouter = Router();
 
-const MAX_LIMIT = 100;
+const MAX_LIMIT = MAX_MATCHES_LIMIT;
 
 matchRouter.get('/', async (req, res) => {
     const parsed = listMatchesQuerySchema.safeParse(req.query);
@@ -62,8 +63,8 @@ matchRouter.post('/', async (req, res) => {
             .returning();
 
         res.status(201).json({ data: event });
-    } catch (error) {
-        console.error('Failed to create match:', error);
+    } catch (e) {
+        console.error('Failed to create match:', e);
         res.status(500).json({
             error: 'Failed to create match.',
         });

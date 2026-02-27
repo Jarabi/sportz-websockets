@@ -7,9 +7,12 @@ export const MATCH_STATUS = {
     FINISHED: 'finished',
 };
 
+// Define limit cap
+export const MAX_MATCHES_LIMIT = 100;
+
 // Validate limit as optional positive integer with max 100
 export const listMatchesQuerySchema = z.object({
-    limit: z.coerce.number().int().positive().max(100).optional(),
+    limit: z.coerce.number().int().positive().max(MAX_MATCHES_LIMIT).optional(),
 });
 
 // Validate match ID parameter as positive integer
