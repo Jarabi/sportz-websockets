@@ -26,7 +26,8 @@ export function attachWebSocketServer(server) {
     // Protect the WebSocket upgrade path before connection is established
     server.on('upgrade', async (req, socket, head) => {
         // Only protect WebSocket upgrades to /ws
-        if (req.url !== '/ws') {
+        const { pathname } = new URL(req.url, `http://${req.headers.host}`);
+        if (pathname !== '/ws') {
             socket.destroy();
             return;
         }
