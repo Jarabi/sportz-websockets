@@ -35,10 +35,12 @@ function sendJson(socket, payload) {
 }
 
 function broadcastToAll(wss, payload) {
+    const message = JSON.stringify(payload);
+
     for (const client of wss.clients) {
         if (client.readyState !== WebSocket.OPEN) continue;
 
-        client.send(JSON.stringify(payload));
+        client.send(message);
     }
 }
 
@@ -91,6 +93,12 @@ function handleMessage(socket, data) {
         sendJson(socket, { type: 'unsubscribed', matchId: message.matchId });
         return;
     }
+
+    sendJson(socket, {
+        type: 'error',
+        message:
+            'Unsupported message. Use subscribe/unsubscribe with integer matchId.',
+    });
 }
 
 export function attachWebSocketServer(server) {
