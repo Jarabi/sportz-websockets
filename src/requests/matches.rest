@@ -11,20 +11,7 @@
 #     "endTime": "2025-02-01T13:45:00.000Z"
 # }
 
-# GET http://localhost:8000/matches/3/commentary HTTP/1.1
-# Content-Type: application/json
-
-# {
-#     "minute": 42,
-#     "sequence": 120,
-#     "period": "3nd half",
-#     "eventType": "goal",
-#     "actor": "Alex Morgan",
-#     "team": "FC Neon",
-#     "message": "GOAL! Powerful finish from the edge of the box.",
-#     "metadata": { "assist": "Sam Kerr" },
-#     "tags": ["goal", "shot"]
-# }
+GET http://localhost:8000/matches/3/commentary
 
 POST http://localhost:8000/matches/2/commentary HTTP/1.1
 Content-Type: application/json
@@ -32,7 +19,7 @@ Content-Type: application/json
 {
     "minute": 58,
     "sequence": 120,
-    "period": "3nd half",
+    "period": "3rd half",
     "eventType": "goal",
     "actor": "Alex Morgan",
     "team": "FC Neon",

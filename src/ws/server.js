@@ -140,8 +140,8 @@ export function attachWebSocketServer(server) {
             handleMessage(socket, data);
         });
 
-        socket.on('error', () => {
-            console.error;
+        socket.on('error', (error) => {
+            console.error('WebSocket connection error:', error);
             socket.terminate();
         });
 

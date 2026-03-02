@@ -92,9 +92,16 @@ commentaryRouter.post('/', async (req, res) => {
             })
             .returning();
 
-            if (res.app.locals.broadcastCommentary) {
+        if (res.app.locals.broadcastCommentary) {
+            try {
                 res.app.locals.broadcastCommentary(event.matchId, event);
+            } catch (broadcastError) {
+                console.error(
+                    'Failed to broadcast commentary:',
+                    broadcastError,
+                );
             }
+        }
 
         res.status(201).json({ data: event });
     } catch (e) {
