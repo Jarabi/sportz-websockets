@@ -1,12 +1,29 @@
 # GET http://localhost:8000/matches
 
-POST http://localhost:8000/matches HTTP/1.1
+# POST http://localhost:8000/matches HTTP/1.1
+# Content-Type: application/json
+
+# {
+#     "sport": "football",
+#     "homeTeam": "Uganda Maulers",
+#     "awayTeam": "Zulu Marauders",
+#     "startTime": "2025-02-01T12:00:00.000Z",
+#     "endTime": "2025-02-01T13:45:00.000Z"
+# }
+
+GET http://localhost:8000/matches/3/commentary
+
+POST http://localhost:8000/matches/2/commentary HTTP/1.1
 Content-Type: application/json
 
 {
-    "sport": "football",
-    "homeTeam": "Manchester City",
-    "awayTeam": "England United",
-    "startTime": "2025-02-01T12:00:00.000Z",
-    "endTime": "2025-02-01T13:45:00.000Z"
+    "minute": 58,
+    "sequence": 120,
+    "period": "3rd half",
+    "eventType": "goal",
+    "actor": "Alex Morgan",
+    "team": "FC Neon",
+    "message": "GOAL! Powerful finish from the edge of the box.",
+    "metadata": { "assist": "Sam Kerr" },
+    "tags": ["goal", "shot"]
 }
